@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
 
 import com.ust.capstone.user_service.service.CustomUserDetailsService;
 
@@ -47,4 +48,8 @@ public class AuthConfig {
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
 		return authenticationProvider;
 	}
+	@Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }
