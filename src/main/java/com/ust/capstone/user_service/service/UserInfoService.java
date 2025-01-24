@@ -11,6 +11,8 @@ import com.ust.capstone.user_service.entity.UserInfoEntity;
 @Service
 public class UserInfoService {
     
+
+    
     @Autowired
     UserInfoRepository userInfoRepository;
 
