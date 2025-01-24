@@ -26,14 +26,13 @@ public class UserInfoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private int userId;
+    
     @Column(name="username")
     private String username;
 
     @Column(name="pword")
     private String password;
 
-    // @ManyToOne
-    // @JoinColumn(name="user_role_id")
-    // @JsonManagedReference
-    // private RoleInfoPojo roleInfo;
+    @Column(name = "role_id")
+    private int roleId; 
 }
