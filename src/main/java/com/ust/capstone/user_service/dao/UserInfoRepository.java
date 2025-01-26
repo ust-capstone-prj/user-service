@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ust.capstone.user_service.entity.UserInfoEntity;
 
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfoEntity,String>{
+public interface UserInfoRepository extends JpaRepository<UserInfoEntity, Integer>{
     
     Optional<UserInfoEntity> findByUsername(String username);
 }
