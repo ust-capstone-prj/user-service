@@ -26,12 +26,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<UserInfoEntity> user = userInfoRepository.findByUsername(username);
 
-		// feign client to fetch role by role id
-
-		RoleInfoPojo roleInfo = restTemplate.getForObject("http://localhost:1313/api/roles/"+user.get().getRoleId(), RoleInfoPojo.class);
-		return user.map((userOptional)-> new CustomUserDetails(userOptional, roleInfo ))
+		RoleInfoPojo roleInfo = restTemplate.getForObject("http://localhost:1313/api/roles/" + user.get().getRoleId(),
+				RoleInfoPojo.class);
+		return user.map((userOptional) -> new CustomUserDetails(userOptional, roleInfo))
 				.orElseThrow(() -> new UsernameNotFoundException("Username/password not valid!"));
 	}
 }
-    
-
