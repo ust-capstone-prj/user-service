@@ -1,7 +1,8 @@
 package com.ust.capstone.user_service.controller;
 
-import java.util.List;
-import java.util.Map;
+// import java.util.List;
+// import java.util.Map;
+// import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,12 +11,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ust.capstone.user_service.entity.UserInfoEntity;
 import com.ust.capstone.user_service.pojo.UserRoleTokenPojo;
 import com.ust.capstone.user_service.service.JwtService;
@@ -24,6 +25,8 @@ import com.ust.capstone.user_service.service.UserInfoService;
 @RestController
 @RequestMapping("/api/auth")
 public class UserInfoController {
+
+    
     @Autowired
     UserInfoService userInfoService;
 
@@ -34,6 +37,11 @@ public class UserInfoController {
     private UserInfoService userCredService;
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserInfoEntity> getUserByUsername(@PathVariable String username) {
+        return new ResponseEntity<UserInfoEntity>(userInfoService.getUserByUsername(username),HttpStatus.OK);
+    }
 
     @PostMapping("/register")
     public UserInfoEntity register(@RequestBody UserInfoEntity user) {
@@ -56,7 +64,7 @@ public class UserInfoController {
                     .map((eachRole) -> eachRole.toString())
                     .toList()
                     .get(0);
-            return new UserRoleTokenPojo(user.getUsername(), role, jwtService.generateToken(user.getUsername()));
+            return new UserRoleTokenPojo(user.getUserId(),user.getUsername(), role, jwtService.generateToken(user.getUsername()));
             // return userCredService.generateToken(user.getUsername());
         }
         return null;

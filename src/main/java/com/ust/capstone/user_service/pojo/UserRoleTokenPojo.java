@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UserRoleTokenPojo {
-   // private int userId;
+    private int userId;
     private String username;
     //private int roleId;
     private String roleName;
