@@ -27,9 +27,9 @@ public class UserInfoService {
     // return userInfoRepository.findAll();
     // }
 
-    // public UserInfoEntity getUserByUsername(String username) {
-    // return userInfoRepository.findByUsername(username).orElse(null);
-    // }
+    public UserInfoEntity getUserByUsername(String username) {
+    return userInfoRepository.findByUsername(username).orElse(null);
+    }
 
     // public UserInfoEntity addUser(UserInfoEntity newUser){
     // return userInfoRepository.saveAndFlush(newUser);
