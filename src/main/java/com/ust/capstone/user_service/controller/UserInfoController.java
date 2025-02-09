@@ -26,7 +26,6 @@ import com.ust.capstone.user_service.service.UserInfoService;
 @RequestMapping("/api/auth")
 public class UserInfoController {
 
-    
     @Autowired
     UserInfoService userInfoService;
 
@@ -40,7 +39,7 @@ public class UserInfoController {
 
     @GetMapping("/username/{username}")
     public ResponseEntity<UserInfoEntity> getUserByUsername(@PathVariable String username) {
-        return new ResponseEntity<UserInfoEntity>(userInfoService.getUserByUsername(username),HttpStatus.OK);
+        return new ResponseEntity<UserInfoEntity>(userInfoService.getUserByUsername(username), HttpStatus.OK);
     }
 
     @PostMapping("/register")
@@ -64,10 +63,17 @@ public class UserInfoController {
                     .map((eachRole) -> eachRole.toString())
                     .toList()
                     .get(0);
-            return new UserRoleTokenPojo(user.getUserId(),user.getUsername(), role, jwtService.generateToken(user.getUsername()));
+            return new UserRoleTokenPojo(user.getUserId(), user.getUsername(), role,
+                    jwtService.generateToken(user.getUsername()));
             // return userCredService.generateToken(user.getUsername());
         }
         return null;
+    }
+
+    @GetMapping("/count/role/{roleid}")
+    public ResponseEntity<Long> getUsersCountByRoleId(@PathVariable("roleid") int id) {
+        long count = userInfoService.countUsersByRoleId(id);
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
 }

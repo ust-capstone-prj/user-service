@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.ust.capstone.user_service.entity.UserInfoEntity;
 
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfoEntity, Integer>{
-    
+public interface UserInfoRepository extends JpaRepository<UserInfoEntity, Integer> {
+
     Optional<UserInfoEntity> findByUsername(String username);
+
+    long countByRoleId(int roleId);
 }

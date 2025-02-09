@@ -48,4 +48,8 @@ public class UserInfoService {
     public UserInfoEntity getUserByUsername(String username) {
         return userInfoRepository.findByUsername(username).orElse(null);
     }
+
+    public long countUsersByRoleId(int roleId) {
+        return userInfoRepository.countByRoleId(roleId);
+    }
 }
